@@ -1,5 +1,3 @@
-
-
 %% Figure 2.3
 chan2plot = 'pz'; % you can pick any electrode (type {EEG.chanlocs.labels} for all electrodes)
 % compute ERP (time-domain trial average from selected electrode)
@@ -67,3 +65,4 @@ fprintf('First 5 timepoints of Raw PZ data (Trial 1):\n')
 disp(pz_data(1:5))
 fprintf('\nFirst 5 timepoints of Filtered PZ data (Trial 1):\n')
 disp(filtered_pz_data(1:5))
+%%
