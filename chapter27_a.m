@@ -278,36 +278,36 @@ convolution_result_fft = convolution_result_fft(half_of_wavelet_size+1:end-half_
 convolution_result_fft = reshape(convolution_result_fft,EEG.pnts,EEG.trials);
 analyticsignal2        = abs(convolution_result_fft).^2;
 
-% Panel A: correlation in a specified window
-tfwindowdata1 = mean(analyticsignal1(timeidx1(1):timeidx1(2),:),1);
-tfwindowdata2 = mean(analyticsignal2(timeidx2(1):timeidx2(2),:),1);
-figure
-subplot(121)
-plot(tfwindowdata1,tfwindowdata2,'.')
-axis square
-title([ 'TF window correlation, r_p=' num2str(corr(tfwindowdata1',tfwindowdata2','type','p')) ], 'FontSize', 14)
-xlabel([ sensor1 ': ' num2str(timewin1(1)) '-' num2str(timewin1(2)) '; ' num2str(centerfreq1) ' Hz' ], 'FontSize', 14)
-ylabel([ sensor2 ': ' num2str(timewin2(1)) '-' num2str(timewin2(2)) '; ' num2str(centerfreq2) ' Hz' ], 'FontSize', 14)
-
-% also plot rank-transformed data
-subplot(122)
-plot(tiedrank(tfwindowdata1),tiedrank(tfwindowdata2),'.')
-axis square
-xlabel([ sensor1 ': ' num2str(timewin1(1)) '-' num2str(timewin1(2)) '; ' num2str(centerfreq1) ' Hz' ], 'FontSize', 14)
-ylabel([ sensor2 ': ' num2str(timewin2(1)) '-' num2str(timewin2(2)) '; ' num2str(centerfreq2) ' Hz' ], 'FontSize', 14)
-title([ 'TF window correlation, r_p=' num2str(corr(tfwindowdata1',tfwindowdata2','type','s')) ], 'FontSize', 14)
-
-% panel B: correlation over time
-corr_ts = zeros(size(EEG.times));
-for ti=1:EEG.pnts
-    corr_ts(ti) = corr(analyticsignal1(ti,:)',analyticsignal2(ti,:)','type','s');
-end
-
-figure
-plot(EEG.times,corr_ts)
-set(gca,'xlim',[-200 1200])
-xlabel('Time (ms)', 'FontSize', 14), ylabel('Spearman''s rho', 'FontSize', 14)
-set(gca, 'FontSize', 14)
+% % Panel A: correlation in a specified window
+% tfwindowdata1 = mean(analyticsignal1(timeidx1(1):timeidx1(2),:),1);
+% tfwindowdata2 = mean(analyticsignal2(timeidx2(1):timeidx2(2),:),1);
+% figure
+% subplot(121)
+% plot(tfwindowdata1,tfwindowdata2,'.')
+% axis square
+% title([ 'TF window correlation, r_p=' num2str(corr(tfwindowdata1',tfwindowdata2','type','p')) ], 'FontSize', 14)
+% xlabel([ sensor1 ': ' num2str(timewin1(1)) '-' num2str(timewin1(2)) '; ' num2str(centerfreq1) ' Hz' ], 'FontSize', 14)
+% ylabel([ sensor2 ': ' num2str(timewin2(1)) '-' num2str(timewin2(2)) '; ' num2str(centerfreq2) ' Hz' ], 'FontSize', 14)
+%
+% % also plot rank-transformed data
+% subplot(122)
+% plot(tiedrank(tfwindowdata1),tiedrank(tfwindowdata2),'.')
+% axis square
+% xlabel([ sensor1 ': ' num2str(timewin1(1)) '-' num2str(timewin1(2)) '; ' num2str(centerfreq1) ' Hz' ], 'FontSize', 14)
+% ylabel([ sensor2 ': ' num2str(timewin2(1)) '-' num2str(timewin2(2)) '; ' num2str(centerfreq2) ' Hz' ], 'FontSize', 14)
+% title([ 'TF window correlation, r_p=' num2str(corr(tfwindowdata1',tfwindowdata2','type','s')) ], 'FontSize', 14)
+%
+% % panel B: correlation over time
+% corr_ts = zeros(size(EEG.times));
+% for ti=1:EEG.pnts
+%     corr_ts(ti) = corr(analyticsignal1(ti,:)',analyticsignal2(ti,:)','type','s');
+% end
+%
+% figure
+% plot(EEG.times,corr_ts)
+% set(gca,'xlim',[-200 1200])
+% xlabel('Time (ms)', 'FontSize', 14), ylabel('Spearman''s rho', 'FontSize', 14)
+% set(gca, 'FontSize', 14)
 
 % Panel C: exploratory time-frequency power correlations
 times2save = -200:25:1200;
